@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: sinatra
+    process: web
+  name: sinatra
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sinatra
+      process: web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sinatra
+        process: web
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: "3000"
+        envFrom:
+        - configMapRef:
+            name: sinatra
+        image: docker.io/geshan/sinatra-sample:latest #replace with the image we created in aws ecr
+        imagePullPolicy: Always
+        name: sinatra
+        ports:
+        - containerPort: 45567
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 4567
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2
