@@ -123,3 +123,116 @@ helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dash
 ```
 # delete cluster (kind)
 we do `kind delete cluster`
+
+### Microk8s
+we will follow these step to install it:
+`sudo snap install microk8s --classic`
+#check the status
+`microk8s status --wait-ready`
+#turn on the service i want
+`microk8s enable dashboard dns registry istio`
+
+# complete guide
+```
+To install **MicroK8s** on GitHub Codespaces, follow these steps:  
+
+### **Step 1: Update and Install Dependencies**  
+First, update the package list and install necessary dependencies:  
+```bash
+sudo apt update && sudo apt install -y snapd
+```
+
+### **Step 2: Install MicroK8s**  
+Now, install MicroK8s using Snap:  
+```bash
+sudo snap install microk8s --classic
+```
+
+### **Step 3: Add User to MicroK8s Group**  
+To avoid using `sudo` every time, add your user to the `microk8s` group:  
+```bash
+sudo usermod -aG microk8s $USER
+newgrp microk8s
+```
+
+### **Step 4: Verify Installation**  
+Check the status of MicroK8s:  
+```bash
+microk8s status --wait-ready
+```
+
+### **Step 5: Enable Essential Add-ons**  
+Enable DNS, Storage, and other useful add-ons:  
+```bash
+microk8s enable dns storage ingress
+```
+
+### **Step 6: Use kubectl with MicroK8s**  
+Since MicroK8s includes `kubectl`, you can use:  
+```bash
+microk8s kubectl get nodes
+```
+Or, create an alias for convenience:  
+```bash
+alias kubectl="microk8s kubectl"
+```
+
+### **Step 7: Deploy a Test Application (Optional)**  
+To verify everything is working, deploy an Nginx pod:  
+```bash
+microk8s kubectl run nginx --image=nginx --port=80
+microk8s kubectl get pods
+```
+
+```note
+$ sIt looks like **GitHub Codespaces** does not support **systemd**, which is required for **Snapd** to function properly. Unfortunately, this means that **MicroK8s cannot be installed on GitHub Codespaces** because it relies on Snap.  
+
+### **Alternative Solutions**  
+Since Snap isn't working, you can try these alternative Kubernetes solutions on Codespaces:  
+
+#### **Option 1: Install K3s (Lightweight Kubernetes)**  
+K3s is a lightweight Kubernetes distribution that does **not** require Snap. You can install it with:  
+```bash
+curl -sfL https://get.k3s.io | sh -
+```
+Then, check if it's running:  
+```bash
+k3s kubectl get nodes
+```
+
+#### **Option 2: Use Kind (Kubernetes in Docker)**  
+If you prefer running Kubernetes in Docker, you can install **Kind**:  
+```bash
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+```
+Then, create a cluster:  
+```bash
+kind create cluster
+kubectl get nodes
+```
+
+
+### **Which One Should You Choose?**  
+- **If you want a minimal and fast setup → K3s**  
+- **If you need a Kubernetes cluster inside Docker → Kind**  
+
+Since **MicroK8s won't work on Codespaces**, I recommend using **K3s or Kind** instead.
+```
+
+#enable the dns
+`microk8s enable dns`
+
+# to deploy with microk8s we do:
+`microk8s kubectl apply -f k8s/deployment.yml`
+next we do `microk8s get pod` next `microk8s kubectl get deployment` next `microk8s kubectl get pod`
+
+note we do port-forward to access the ip addres:
+`microk8s kubectl port-forward deployments/sinatra 8080:4567 --address 0.0.0.0.0`
+
+curl localhost:8080
+
+# enable dashboard
+`microk8s enable dashboard`-> microk8s dashboard-proxy-> copy the token -> open ec2 and edit inbound to allow traffic -> paste ip ec2 + ip dashboard into your browser -> paste the token-> and voila.bingo!
+
