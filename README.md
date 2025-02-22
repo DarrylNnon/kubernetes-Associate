@@ -101,3 +101,25 @@ we move into the bin file `sudo mv kubectl /usr/local/bin`
 
  ## kubernetes dashboard
  `step to use it on cloud9 -> stop the cluster (minikube stop)-> minikube start --listen-address='0.0.0.0' we notice that we loose our app wich is find now we are going to do -> kubectl proxy --address='0.0.0.0' --disable-filter=true -> add inbound on secruity group and allow port 8081 for dasboard and copy the ip and add the link provided by the terminal to your browser.`
+
+ ### Day 3:today we're using kind(docker in kubernetes) to practice.
+
+ # installation of kind: [https://kind.sigs.k8s.io/](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
+
+`# For AMD64 / x86_64
+[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.27.0/kind-linux-amd64
+# For ARM64
+[ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.27.0/kind-linux-arm64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind`
+
+# create kubertes dashboard:[https://kubernetes.io/docs](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
+
+```
+# Add kubernetes-dashboard repository
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+# Deploy a Helm Release named "kubernetes-dashboard" using the kubernetes-dashboard chart
+helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
+```
+# delete cluster (kind)
+we do `kind delete cluster`
