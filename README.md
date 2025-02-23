@@ -236,3 +236,31 @@ curl localhost:8080
 # enable dashboard
 `microk8s enable dashboard`-> microk8s dashboard-proxy-> copy the token -> open ec2 and edit inbound to allow traffic -> paste ip ec2 + ip dashboard into your browser -> paste the token-> and voila.bingo!
 
+# when the connection to the server local host refused. we do the following `microk8s config > ~/.kube/conf`
+
+# expose pod on communication ip [https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/]
+debug service `kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh`
+we copy the ip address of the running pod and we add wget in front plus the ip address of the open port like this: `wget 10.1.22.12:4567` (this is an example) then we cat to to see the content eg.cat index.html
+
+# Service cluster ip
+
+resources: [https://kubernetes.io](https://kubernetes.io/docs/concepts/services-networking/service/)
+
+we now can use: 
+- microk8s kubectl apply -f k8s/service-clusterip.yml
+- microk8s kubectl get svc
+- microk8s kubectl describe service service-clusterip
+- microk8s kubectl patch service service-clusterip -p
+delete at the end by doing microk8s kubectl delete svc service-clusterip
+- microk8s kubectl get svc
+
+endpoint is the pod link to the service
+
+# kubectl expose 
+`microk8s kubectl expose deploy sinatra --port=8080 --target-port=4567`
+- microk8s kubectl get svc
+- microk8s kubectl delete svc sinatra
+
+# 
+
+
