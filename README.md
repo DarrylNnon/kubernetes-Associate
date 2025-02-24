@@ -261,6 +261,73 @@ endpoint is the pod link to the service
 - microk8s kubectl get svc
 - microk8s kubectl delete svc sinatra
 
-# 
+![image](https://github.com/user-attachments/assets/25fb928f-d90b-43cb-bdfd-c51b4a1e643f)
+]()
+
+# Service ClusterIP
+- readinessprobe is determine wether my application is running or not
+# create a service
+`microk8s kubectl apply -f k8s/service-clusterip.yml`
+# we check the service running
+`microk8s kubectl get svc`
+# we describe the service
+`microk8s kubectl describe service service-clusterip`
+
+# service Nodeport
+[https://kubernetes.io/](https://kubernetes.io/docs/concepts/services-networking/service/)
+```yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app.kubernetes.io/name: MyApp
+  ports:
+     # the port number that the resources within the cluster will use to communicate
+    - protocol: TCP
+      port: 8080
+      targetPort: 4567
+      # The external port to connect to the node
+      NodePort: 3001```
+
+# We launch our service nodeport
+- `microk8s kubectl apply -f k8s/service-nodeport.yml`
+- `microk8s kubectl get svc`
+- `microk8s kubectl describe svc service-nodeport`
+- `curl localhost:3001`
+Now we will test our busy box:
+`microk8s kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh`
+Now we do wget 10.152.183.242:8080
+
+# We make sure we delete it after :
+`microk8s kubectl delete svc service-nodeport`
+
+# Service Load Balancer
+
+resource: [https://kubernetes.io/](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer)
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app.kubernetes.io/name: sinatra
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 4567
+  clusterIP: 10.0.171.239
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.0.2.127
+```
+`microk8s kubectl apply -f k8s/service-loadbalancer.yml`
+- `mirok8s kubectl cluster-info`
+-  `microk8s kubectl get nodes`
+- `microk8s kubectl api-resources`
 
 
