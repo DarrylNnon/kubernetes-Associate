@@ -331,3 +331,5 @@ status:
 - `microk8s kubectl api-resources`
 
 
+## Service externalname (taking a break to rest and start working on it later.thanks)
+
