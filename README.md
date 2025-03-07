@@ -333,3 +333,33 @@ status:
 
 ## Service externalname (taking a break to rest and start working on it later.thanks)
 
+## Ingress with minikube
+- [https://kubernetes.io/](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)
+
+- minikube addons enable ingress # to enable the ingress controller
+- kubectl get pods -n ingress-nginx
+- kubectl create deployment web --image=gcr.io/google-samples/hello-app:1.0 # create a deployment
+- kubectl get deployment web  # verify the deployment
+- kubectl expose deployment web --type=NodePort --port=8080 # expose the deployment
+- kubectl get service web # verify the service
+
+how i expose the port today:
+- kubectl apply -f deployment.yml # to deploy
+- kubectl expose deploy sinatra --port=8080 --target-port=4567
+- kubectl get svc # to see the service
+- kubectl apply -f ingress.yml or kubectl create -f ingress.yml
+- kubectl get ingress
+- kubectl describe ingress
+- curl http://localhost/sinatra
+to debbug i use busybox:
+- kubectl run -it --rm --restart=Never busibox --image=grc.io/google-containers/busibox sh
+
+## jobs we gonna try using cron job here
+- kubectl create job hello --image=busybox -- echo "Hello Francklin"
+- kubectl describe job
+
+- kubectl create cronjob hello --image=busybox --schedule="*/1 * * * *"
+- kubectl get cronjob # to check
+- kubectl delete cronjob hello # to delete it
+
+# Replicaset
