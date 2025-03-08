@@ -362,4 +362,37 @@ to debbug i use busybox:
 - kubectl get cronjob # to check
 - kubectl delete cronjob hello # to delete it
 
-# Replicaset
+
+how to start minikube from the docker: 
+```sh
+minikube start --driver=docker
+```
+
+# Replicasets
+Replicaset is a way to maintain a desired amount of redundant pods(replicas) to provide a guarantee of availability.
+
+- kubectl apply - replicaset.yml
+- kubectl get rs # rs for replicaset
+- wkubectl apply -f deployment.yml # to check the status of our deplyoment
+
+# scale and autoscale
+auto scale is dynamically adjust the number of pods or nodes based on CPU, memory, or custom metrics to optimize performance and cost.
+- mission: is to automate deployment, scaling , and operations of containerized application, ensuring reliability and efficiency
+
+eg: kubectl scale --replicas=4 deploy/sinatra 
+deployment.apps/sinatra scaled
+
+- kubectl get deploy
+- kubectl get pods
+
+for horizontal autoscaler i can do:
+- eg:  kubectl autoscale deploy sinatra  --cpu-percent=50 --min=2 --max=10
+- kubectl get hpa # to check auscale 
+- kubectl edit hpa sinatra # this will open a vim format where we can edit our horizontalpodautoscaler
+-  kubectl delete hpa sinatra # to delete 
+
+# Configmap
+
+Configmap stores configuration data as key-value pairs, allowing applications to be configured dynamically without container images.
+
+Mission: Configmap decouple configuration from application code, enabling better portability, flexibility, and environment-specific settings management.

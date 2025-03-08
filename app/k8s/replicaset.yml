@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: sinatra-rc
+  labels:
+    name: sinatra-rc
+spec:
+  # modify replicas according to your case
+  replicas: 2
+  selector:
+    matchLabels:
+      name: sinatra
+  template:
+    metadata:
+      labels:
+        name: sinatra
+    spec:
+      containers:
+      - name: php-redis
+        image: docker.io/geshan/sinatra-sample:latest
