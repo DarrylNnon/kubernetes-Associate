@@ -17,9 +17,10 @@ spec:
         process: web
     spec:
       containers:
-      - env:
-        - name: PORT
-          value: "3000"
+      - envFrom:
+        - configMapRef:
+        - name: configmap
+          value: "Goodbye Moon"
         envFrom:
         - configMapRef:
             name: sinatra
@@ -37,3 +38,16 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 2
+        volumeMounts:
+        - name: configmap
+          mountPath: "/config"
+          readOnly: true
+    volumes:
+    - name: config
+      configMap:
+      name: game-demo
+      items:
+      - key: "game.properties"
+        path: "game.properties"
+      - key: "user-interface.properties"
+        path: "user-interface.properties"

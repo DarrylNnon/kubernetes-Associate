@@ -396,3 +396,12 @@ for horizontal autoscaler i can do:
 Configmap stores configuration data as key-value pairs, allowing applications to be configured dynamically without container images.
 
 Mission: Configmap decouple configuration from application code, enabling better portability, flexibility, and environment-specific settings management.
+
+for today we do:
+
+```sh
+docker build -t sinatra-example .
+```
+- kubectl apply -f configmap.yml
+- kubectl get configmap
+
