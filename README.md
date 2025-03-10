@@ -414,3 +414,4 @@ A secret is an object used to store and manage sensitive information, such as pa
 - kubectl describe sinatra-basic-auth
 - kubectl get secret sinatra-basic-auth -o jsonpath='{.data}'
 - run kubernetes dashboard to viiw components
+- to run kubernetes dashboard on microk8s i do : microk8s kubectl kube-proxy
