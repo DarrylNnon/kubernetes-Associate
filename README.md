@@ -405,3 +405,12 @@ docker build -t sinatra-example .
 - kubectl apply -f configmap.yml
 - kubectl get configmap
 
+## Secrets
+
+A secret is an object used to store and manage sensitive information, such as passwords, API keys, SSH keys, and OAuth tokens.
+
+- kubectl apply -f secrets.yml
+- kubectl get secrets
+- kubectl describe sinatra-basic-auth
+- kubectl get secret sinatra-basic-auth -o jsonpath='{.data}'
+- run kubernetes dashboard to viiw components

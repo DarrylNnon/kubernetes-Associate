@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - envFrom:
-        - configMapRef:
+        - secretRef:
         - name: configmap
           value: "Goodbye Moon"
         envFrom:
