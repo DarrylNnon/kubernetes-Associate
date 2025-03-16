@@ -415,3 +415,19 @@ A secret is an object used to store and manage sensitive information, such as pa
 - kubectl get secret sinatra-basic-auth -o jsonpath='{.data}'
 - run kubernetes dashboard to viiw components
 - to run kubernetes dashboard on microk8s i do : microk8s kubectl kube-proxy
+
+## PV and PVC
+i do 
+```sh
+microk8s kubectl enable storage
+```
+![alt text](image.png)
+
+- kubectl get sc
+![alt text](image-1.png)
+
+- kubectl get pv
+- kubectl describe pv
+# create a pvc 
+
+![alt text](image-2.png)
