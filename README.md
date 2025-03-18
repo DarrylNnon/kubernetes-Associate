@@ -431,3 +431,13 @@ microk8s kubectl enable storage
 # create a pvc 
 
 ![alt text](image-2.png)
+
+## deployment with storage
+- kubectl apply -f deployment-w-storage.yml
+- kubectl get pods
+- kubectl describe
+![image](https://github.com/user-attachments/assets/064600d1-90ba-4aac-bee3-4356c49ea897)
+i always has to have  pvc to manage persistent storage for my application. PVC and PV are used for decoupling storage from pods.kubernetes pods are ephemeral. Separation of storage.
+
+### NetPolicy
+
