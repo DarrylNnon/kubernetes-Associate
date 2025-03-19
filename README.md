@@ -441,3 +441,17 @@ i always has to have  pvc to manage persistent storage for my application. PVC a
 
 ### NetPolicy
 
+- microk8s enable cilium
+- kubectl namespace fire or kubectl ns fire
+- kubectl create deploy fire-nginx --image=nginx -n fire
+- kubectl create deploy ice-nginx --image=nginx -n ice
+- kubectl create deploy wind-nginx --image=nginx -n wind
+- kubectl get pods -n ice -o wide
+- kubectl get deploy -A
+- kubectl -n ice <pod> --curl <fire>
+- kubectl -n ice ice-nginx-65jtjthgk-wjfh56 -- curl 10.0.0.204
+  
+  ![image](https://github.com/user-attachments/assets/a1fa0f9d-a504-4000-98b3-e6f643f46ba7)
+
+![image](https://github.com/user-attachments/assets/9d397542-585f-4413-9549-d63216614593)
+
