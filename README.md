@@ -465,3 +465,24 @@ Knative is a platform-agnostic solution for running serverless deployments.
 [https://knative.dev/](https://knative.dev/docs/getting-started/)
 
 ![alt text](image-4.png)
+
+# OpenFaas
+we use microk8s fro the deployment of our kubernetes [https://microk8s.io/]
+
+![image](https://github.com/user-attachments/assets/c161a459-a49b-4e09-85d7-396441e252fc)
+
+![image](https://github.com/user-attachments/assets/d8bc1e05-989c-46d2-9384-10375972fb06)
+
+- Deploy
+![image](https://github.com/user-attachments/assets/4add77b6-4d53-484b-ac3a-df912732e636)
+
+
+# Helm
+Helm is the package manager for kubernetes [https://helm.sh/docs/](https://helm.sh/docs/topics/architecture/)
+
+- install Helm
+
+![image](https://github.com/user-attachments/assets/86e1b0d6-37c6-4cac-a864-ad6d983c0d63)
+
+# Service Mesh (linkerd)
+
