@@ -458,3 +458,10 @@ i always has to have  pvc to manage persistent storage for my application. PVC a
 # create a new environment on cloud9
 
 ![alt text](image-3.png)
+
+# Knative
+Knative is a platform-agnostic solution for running serverless deployments.
+
+[https://knative.dev/](https://knative.dev/docs/getting-started/)
+
+![alt text](image-4.png)
