@@ -455,3 +455,6 @@ i always has to have  pvc to manage persistent storage for my application. PVC a
 
 ![image](https://github.com/user-attachments/assets/9d397542-585f-4413-9549-d63216614593)
 
+# create a new environment on cloud9
+
+![alt text](image-3.png)
