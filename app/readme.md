@@ -20,3 +20,11 @@ cd app/
    47  docker images
    48  history
 ```
+
+# push it to ecr
+
+![alt text](image.png)
+
+we have our public registry, now we can run kubernetes minikube for testing
+
+![alt text](image-1.png)
